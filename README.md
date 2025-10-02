@@ -1,59 +1,108 @@
-# MongoDB Fundamentals - Week 1
+# 📚 PLP Bookstore MongoDB Project
 
-## Setup Instructions
+This project demonstrates how to use **MongoDB with Node.js** for basic CRUD operations, advanced queries, indexing, and aggregation.  
 
-Before you begin this assignment, please make sure you have the following installed:
+It contains two main scripts:
 
-1. **MongoDB Community Edition** - [Installation Guide](https://www.mongodb.com/docs/manual/administration/install-community/)
-2. **MongoDB Shell (mongosh)** - This is included with MongoDB Community Edition
-3. **Node.js** - [Download here](https://nodejs.org/)
+- **insert_books.js** → Populates MongoDB with sample book data  
+- **queries.js** → Runs CRUD operations, queries, updates, deletes, and aggregations  
 
-### Node.js Package Setup
+---
 
-Once you have Node.js installed, run the following commands in your assignment directory:
+## ✅ Prerequisites
 
-```bash
-# Initialize a package.json file
-npm init -y
+- [Node.js](https://nodejs.org/) installed  
+- [MongoDB](https://www.mongodb.com/) running locally (or MongoDB Atlas)  
+- Install MongoDB Node.js driver:  
+  ```bash
+  npm install mongodb
 
-# Install the MongoDB Node.js driver
-npm install mongodb
-```
+⚙️ Setup
 
-## Assignment Overview
+    Clone or download this project
 
-This week focuses on MongoDB fundamentals including:
-- Creating and connecting to MongoDB databases
-- CRUD operations (Create, Read, Update, Delete)
-- MongoDB queries and filters
-- Aggregation pipelines
-- Indexing for performance
+    Start MongoDB locally:
 
-## Submission
+    mongod
 
-Complete all the exercises in this assignment and push your code to GitHub using the provided GitHub Classroom link.
+    (Default connection is mongodb://localhost:27017)
 
-## Getting Started
+    Open a terminal inside the project folder
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install MongoDB locally or set up a MongoDB Atlas account
-4. Run the provided `insert_books.js` script to populate your database
-5. Complete the tasks in the assignment document
+▶️ Usage
+1. Insert Sample Books
 
-## Files Included
+Run:
 
-- `Week1-Assignment.md`: Detailed assignment instructions
-- `insert_books.js`: Script to populate your MongoDB database with sample book data
+node insert_books.js
 
-## Requirements
+This script will:
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- MongoDB Shell (mongosh) or MongoDB Compass
+    Connect to database plp_bookstore
 
-## Resources
+    Drop the books collection if it already exists
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [MongoDB University](https://university.mongodb.com/)
-- [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/) 
+    Insert sample book data
+
+    Print inserted books in the console
+
+2. Run Queries
+
+After inserting books, run:
+
+node queries.js
+
+This script demonstrates:
+
+    Find all books (limit 10)
+
+    Find books in a specific genre (e.g. Fiction)
+
+    Find books published after a certain year (e.g. 2000)
+
+    Find in-stock books
+
+    Top 5 most expensive books
+
+    Aggregation → count & average price per genre
+
+    Aggregation → publisher with most books
+
+    Create an index ({ genre: 1, published_year: -1 })
+
+    Example update (in_stock=false for a book)
+
+    Example delete (remove a book by title)
+
+🖥️ Example Queries in Mongo Shell
+
+After inserting data, you can use mongosh:
+
+mongosh
+use plp_bookstore
+db.books.find().pretty()
+
+Sample queries:
+
+db.books.find({ author: "George Orwell" })
+db.books.find({ published_year: { $gt: 1950 } })
+db.books.find({ genre: "Fiction" })
+db.books.find({ in_stock: true })
+
+📝 Notes
+
+    Default MongoDB URI is:
+
+    mongodb://localhost:27017
+
+    To use MongoDB Atlas, replace the URI in both scripts with your Atlas connection string.
+
+    Both scripts use async/await for clean and modern MongoDB operations.
+
+📌 Project Flow
+
+    Insert sample data → insert_books.js
+
+    Explore CRUD and aggregations → queries.js
+
+    Inspect results in MongoDB Compass or mongosh
